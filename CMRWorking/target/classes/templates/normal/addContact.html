@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org/" th:replace="~{ normal/base::baseFrag(~{::section}) }">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+<body>
+	
+	<section class="main-content">
+	
+		<div th:if="${contactResponse != null}">
+				<input type="hidden" id="captchaResponse" th:value="${contactResponse}" />
+				<input type="hidden" id="toastType" th:value="${toastType}" />
+		</div>
+	
+
+		<div class="container my-5 p-4 bg-white card">
+        <h2 class="text-center mb-4 text-2xl font-semibold text-gray-800">Add New Contact</h2>
+        <form th:action="@{/user/process-contact}" th:object="${contact}" method="post" enctype="multipart/form-data">
+            <!-- Contact Name -->
+            <div class="mb-3">
+                <label for="cName" class="form-label">Contact Name</label>
+                <input type="text" class="form-control"
+		                id="cName" name="cName" placeholder="Enter contact's full name" required>
+            </div>
+
+            <!-- Nickname -->
+            <div class="mb-3">
+                <label for="cNikName" class="form-label">Nickname</label>
+                <input type="text" class="form-control" 
+                		id="cNikName" name="cNikName" placeholder="Enter a nickname (optional)">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="cEmail" class="form-label">Email Address</label>
+                <input type="email" class="form-control"
+                		id="cEmail" name="cEmail" placeholder="name@example.com" required>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mb-3">
+                <label for="cNumber" class="form-label">Phone Number</label>
+                <input min="10" max="14" type="tel" class="form-control"
+                		id="cNumber" name="cNumber" placeholder="e.g., +91-9876543210" required>
+            </div>
+
+            <!-- Work/Profession -->
+            <div class="mb-3">
+                <label for="cWork" class="form-label">Work/Profession</label>
+                <input type="text" class="form-control" id="cWork"
+                		name="cWork" placeholder="e.g., Software Engineer, Doctor">
+            </div>
+
+            <!-- Address -->
+            <div class="mb-3">
+                <label for="cAddress" class="form-label">Address</label>
+                <textarea class="form-control" id="cAddress" name="cAddress"
+                			rows="3" placeholder="Enter contact's full address"></textarea>
+            </div>
+
+            <!-- Important Dates -->
+            <div class="mb-3">
+                <label for="cImpDates" class="form-label">Important Dates</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="cImpDates" name="cImpDates" placeholder="e.g., Birthday: 12/05, Anniversary: 06/10">
+                    <button class="btn btn-outline-secondary" type="button" id="suggestDatesBtn">✨ Suggest Dates</button>
+                    <span class="spinner-border spinner-border-sm text-primary ms-2" role="status" aria-hidden="true" id="datesSpinner" style="display: none;"></span>
+                </div>
+                <div class="form-text">Separate multiple dates with commas.</div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label for="cDesc" class="form-label">Description</label>
+                <div class="input-group">
+                    <textarea class="form-control" id="cDesc" name="cDesc" rows="5" placeholder="Add any additional notes or description about the contact"></textarea>
+                    <button class="btn btn-outline-secondary" type="button" id="summarizeDescBtn">✨ Summarize</button>
+                    <span class="spinner-border spinner-border-sm text-primary ms-2" role="status" aria-hidden="true" id="descSpinner" style="display: none;"></span>
+                </div>
+            </div>
+
+            <!-- Profile Image Upload (for cImgUrl/cImgName) -->
+            <div class="mb-3">
+                <label for="cImgFile" class="form-label">Profile Image</label>
+                <input class="form-control" type="file" id="cImgFile" name="cImgFile" accept="image/*">
+                <div class="form-text">Upload a profile picture for the contact.</div>
+            </div>
+
+            <!-- Is Favorite Checkbox -->
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="cIsFav" name="cIsFav" value="true">
+                <label class="form-check-label" for="cIsFav">Mark as Favorite</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">Add Contact</button>
+            </div>
+			</form>
+    </div>
+		
+		
+		
+		
+	
+	</section>
+	
+</body>
+</html>

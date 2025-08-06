@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org/" th:replace="~{ normal/base::baseFrag(~{::section}) }">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+<body>
+
+	<section class="main-content">
+			<h1>This is the profile of user = <span th:text="${#strings.toUpperCase(user.uName)}"></span></h1>
+	</section>
+
+
+	
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org/" th:replace="~{ normal/base::baseFrag(~{::section}) }">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+<body>
+	
+	<section class="main-content">
+	
+	<h1>This is user dashboard</h1>
+	
+	<div th:if="${loginSuccess != null }">
+			<input type="hidden" id="captchaResponse" th:value="${loginSuccess}" />
+			<input type="hidden" id="toastType" th:value="${toastType}" />
+	</div>
+	
+	
+	<div>
+	<p th:text="${user}"></p>
+	</div>
+	
+	<h1><a th:href="@{/logout}">Logout</a></h1>
+	
+	
+	</section>
+	
+</body>
+</html>

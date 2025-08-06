@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org/" th:replace="~{ normal/base::baseFrag(~{::section}) }">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+<body>
+	
+	<section class="main-content">
+	
+		<div class="container my-5 p-4 bg-white card updateForm">
+        <h2 class="text-center mb-4 text-2xl font-semibold text-gray-800">Update Contact</h2>
+        <form th:action="@{/user/process-update}" th:object="${updateContact}" method="post" enctype="multipart/form-data">
+
+				<div class="row mb-4 align-items-center">
+					<!-- Profile Image -->
+					<div class="col-md-3 text-center">
+						<img th:src="@{'/Images/' + ${updateContact.cImgName}}"
+							alt="Profile Image" class="img-thumbnail rounded-circle"
+							style="width: 150px; height: 150px; object-fit: cover;">
+					</div>
+
+					<!-- Change Button + Hidden Input -->
+					<div class="col-md-9">
+						<label class="form-label fw-bold">Profile Image</label>
+						<div class="d-flex align-items-center gap-3 mb-2">
+							<button type="button" class="btn btn-outline-primary"
+								onclick="document.getElementById('cImgFile').click()">Change
+								Image</button>
+						</div>
+						<span class="text-muted">Click to upload a new profile
+							picture.</span> <input type="file" class="form-control d-none"
+							name="cImgFile" id="cImgFile" accept="image/*"
+							onchange="previewImage(event)">
+					</div>
+				</div>
+
+
+
+				<!-- Contact Name -->
+            <div class="mb-3">
+            
+            	<input type="hidden" th:value="${updateContact.cId}" name="cId" />
+            
+                <label for="cName" class="form-label">Contact Name</label>
+                <input type="text" class="form-control"
+                		th:value="${updateContact.cName}"
+		                id="cName" name="cName" placeholder="Enter contact's full name" required>
+            </div>
+
+            <!-- Nickname -->
+            <div class="mb-3">
+                <label for="cNikName" class="form-label">Nickname</label>
+                <input type="text" class="form-control" th:value="${updateContact.cNikName}"
+                		id="cNikName" name="cNikName" placeholder="Enter a nickname (optional)">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="cEmail" class="form-label">Email Address</label>
+                <input type="email" class="form-control" th:value="${updateContact.cEmail}"
+                		id="cEmail" name="cEmail" placeholder="name@example.com" required>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mb-3">
+                <label for="cNumber" class="form-label">Phone Number</label>
+                <input min="10" max="14" type="tel" class="form-control" th:value="${updateContact.cNumber}"
+                		id="cNumber" name="cNumber" placeholder="e.g., +91-9876543210" required>
+            </div>
+
+            <!-- Work/Profession -->
+            <div class="mb-3">
+                <label for="cWork" class="form-label">Work/Profession</label>
+                <input type="text" class="form-control" id="cWork" th:value="${updateContact.cWork}"
+                		name="cWork" placeholder="e.g., Software Engineer, Doctor">
+            </div>
+
+            <!-- Address -->
+            <div class="mb-3">
+                <label for="cAddress" class="form-label">Address</label>
+                <textarea class="form-control" id="cAddress" name="cAddress" th:text="${updateContact.cAddress}"
+                			rows="3" placeholder="Enter contact's full address"></textarea>
+            </div>
+
+            <!-- Important Dates -->
+            <div class="mb-3">
+                <label for="cImpDates" class="form-label">Important Dates</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" th:value="${updateContact.cImpDates}"
+                     id="cImpDates" name="cImpDates" placeholder="e.g., Birthday: 12/05, Anniversary: 06/10">
+                    <button class="btn btn-outline-secondary" type="button" id="suggestDatesBtn">✨ Suggest Dates</button>
+                    <span class="spinner-border spinner-border-sm text-primary ms-2" role="status" aria-hidden="true" id="datesSpinner" style="display: none;"></span>
+                </div>
+                <div class="form-text">Separate multiple dates with commas.</div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label for="cDesc" class="form-label">Description</label>
+                <div class="input-group">
+                    <textarea class="form-control" id="cDesc" th:text="${updateContact.cDesc}" 
+                    name="cDesc" rows="5" placeholder="Add any additional notes or description about the contact"></textarea>
+                    <button class="btn btn-outline-secondary" type="button" id="summarizeDescBtn">✨ Summarize</button>
+                    <span class="spinner-border spinner-border-sm text-primary ms-2" role="status" aria-hidden="true" id="descSpinner" style="display: none;"></span>
+                </div>
+            </div>
+
+            <!-- Is Favorite Checkbox -->
+            <div class="mb-3 form-check">
+                <input type="checkbox" th:field="*{cIsFav}" class="form-check-input" id="cIsFav" name="cIsFav" value="true" />
+                <label class="form-check-label" for="cIsFav">Mark as Favorite</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">Update Contact</button>
+            </div>
+			</form>
+    </div>
+		
+		
+		
+		
+		
+		
+		
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = document.querySelector('img[alt="Profile Image"]');
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+		
+		
+		
+		
+		
+	</section>
+	
+</body>
+</html>
