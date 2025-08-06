@@ -15,8 +15,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,16 +23,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.multipart.MultipartFile;import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.SCM.Entities.Contacts;
 import com.SCM.Entities.User;
 import com.SCM.Repository.contactRepository;
 import com.SCM.Repository.userRepository;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/user")
@@ -284,15 +278,6 @@ public class UserController {
 		 }catch (Exception e) {
 			 logger.error("Error occurred while updating contact image", e);
 		}
-		 
-		
-
-						 
-			
-			  
-			 
-		
-			
 		 
 		return "redirect:/user/contactProfile/"+contact.getCId();
 	}
