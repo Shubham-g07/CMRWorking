@@ -15,33 +15,45 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+<!-- Google Font: Inter -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+	rel="stylesheet">
+
 <!-- Toastr CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+	rel="stylesheet" />
 
 <!-- Custom CSS for the sidebar and main layout -->
 <link rel="stylesheet" th:href="@{/CSS/style.css}" />
 
 
+<link rel="stylesheet" th:href="@{CSS/profile-style.css}" />
+
 <link rel="stylesheet" th:href="@{/CSS/contactForm.css}" />
 
 <title th:text="${title}"></title>
 </head>
-<body  class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100">
 
 	<!-- Navbar section -->
 	<nav
 		class="navbar fixed-top navbar-light navbar-expand-lg bg-body-tertiary fw-bold"
 		style="background-color: #e3f2fd;">
-		
+
 		<div
 			class="container-fluid d-flex justify-content-between align-items-center">
-            <!-- Menu Toggle Button - Placed correctly in the navbar -->
-            <button id="menu-toggle" class="navbar-toggler p-2 rounded-full hover:bg-gray-200 transition-colors duration-200" type="button" aria-label="Toggle sidebar">
-                <i class="fas fa-bars text-xl text-gray-700"></i>
-            </button>
+			<!-- Menu Toggle Button - Placed correctly in the navbar -->
+			<button id="menu-toggle"
+				class="navbar-toggler p-2 rounded-full rounded-md hover:bg-gray-200 transition-colors duration-200"
+				type="button" aria-label="Toggle sidebar">
+				<i class="fas fa-bars text-xl text-gray-700"></i>
+			</button>
 
-			<a class="navbar-brand ps-4" th:href="@{/}" >Smart Contact Manager</a>
-			       
+			<a class="navbar-brand ps-4" th:href="@{/}">Smart Contact
+				Manager</a>
+
 			<div
 				class="d-flex align-items-center flex-grow-1 justify-content-end position-relative"
 				style="gap: 1rem;">
@@ -54,73 +66,78 @@
 				<!-- Search toggle button -->
 				<button id="searchToggleBtn" class="btn btn-outline-success"
 					type="button">Search</button>
-				</div>
+			</div>
 		</div>
-		
+
 	</nav>
 
-    <!-- Main Content Area (including sidebar and page content) -->
-    <main id="main-layout-container" class="flex-grow-1 main-content-area flex relative">
-        <!-- Sidebar -->
-        <nav id="sidebar" class="sidebar fixed top-0 left-0 h-full text-white shadow-lg z-50 rounded-r-lg pt-16" style="background-image: linear-gradient(to bottom, #e3f2fd, #42a5f5);">
-    <div class="flex flex-col items-center h-full">
-        <div id="sidebar-logo" class="profile cursor-pointer bg-white bg-opacity-20 rounded-full shadow-inner hover:bg-opacity-30 transition-all duration-300">
-           
-        </div>
-        
-        <h3 class="text-xl font-semibold mb-3 text-center">UserName</h3>
-        
-        <div class="divider"></div>
-        
-        <ul class="space-y-4 w-full">
-            <li>
-                <a th:href="@{/user/index}" class="flex items-center p-3 rounded-md hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
-                    <i class="fas fa-home mr-3"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/user/showContacts/0}" class="flex items-center p-3 rounded-md hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
-                    <i class="fas fa-users mr-3"></i>
-                    <span>View Contacts</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/user/addContact}" class="flex items-center p-3 rounded-md hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
-                    <i class="fas fa-plus-circle mr-3"></i>
-                    <span>Add Contact</span>
-                </a>
-            </li>
-            <li>
-                <a href="#" class="flex items-center p-3 rounded-md hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
-                    <i class="fas fa-cog mr-3"></i>
-                    <span>Settings</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/logout}" class="flex items-center p-3 rounded-md hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
-                    <i class="fas fa-sign-out-alt mr-3"></i>
-                    <span>Logout</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
+	<!-- Main Content Area (including sidebar and page content) -->
+	<main id="main-layout-container"
+		class="flex-grow-1 main-content-area flex relative">
+		<!-- Sidebar -->
+		<nav id="sidebar"
+			class="sidebar fixed top-0 left-0 h-full text-white shadow-lg z-50 rounded-r-lg pt-16"
+			style="background-image: linear-gradient(to bottom, #e3f2fd, #42a5f5);">
+			<div class="flex flex-col items-center h-full">
 
-        <!-- Content area for Thymeleaf fragment -->
-        <!-- Added a default padding-left to content-wrapper to prevent content from being under the sidebar when closed -->
-        <div class="flex-grow-1 flex-column p-6 transition-all duration-300 ease-in-out" id="content-wrapper">
-            <div th:replace="${content}"></div>
-        </div>
-    </main>
+				<a th:href="@{/user/profile}" class="block text-decoration-none">
+					<div id="sidebar-logo"
+						class="profile cursor-pointer bg-white bg-opacity-20 rounded-full shadow-inner hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center overflow-hidden">
+						<img id="sidebar-profile-img"
+							th:src="${user.uImgName != null ? '/Images/' + user.uImgName : 'userImage.jpeg'}"
+							alt="User Profile"
+							class="w-full h-full object-cover rounded-full" />
+					</div>
+
+					<div class="text-center">
+						<span th:text="${user.uName}" class="text-xl font-semibold mb-3"></span>
+					</div>
+
+				</a>
+
+				<div class="divider"></div>
+
+				<ul class="space-y-4 w-full">
+					<li><a th:href="@{/user/index}"
+						class="flex items-center p-3 rounded-md hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
+							<i class="fas fa-home mr-3"></i> <span>Dashboard</span>
+					</a></li>
+					<li><a th:href="@{/user/showContacts/0}"
+						class="flex items-center p-3 rounded-md hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
+							<i class="fas fa-users mr-3"></i> <span>View Contacts</span>
+					</a></li>
+					<li><a th:href="@{/user/addContact}"
+						class="flex items-center p-3 rounded-md hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
+							<i class="fas fa-plus-circle mr-3"></i> <span>Add Contact</span>
+					</a></li>
+					<li><a href="#"
+						class="flex items-center p-3 rounded-md hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
+							<i class="fas fa-cog mr-3"></i> <span>Settings</span>
+					</a></li>
+					<li><a th:href="@{/logout}"
+						class="flex items-center p-3 rounded-md hover:bg-white hover:bg-opacity-20 transition-colors duration-200">
+							<i class="fas fa-sign-out-alt mr-3"></i> <span>Logout</span>
+					</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- Content area for Thymeleaf fragment -->
+		<!-- Added a default padding-left to content-wrapper to prevent content from being under the sidebar when closed -->
+		<div
+			class="flex-grow-1 flex-column p-6 transition-all duration-300 ease-in-out"
+			id="content-wrapper">
+			<div th:replace="${content}"></div>
+		</div>
+	</main>
 
 	<footer class="bg-light text-center text-dark py-3 ">
 		<div class="mb-2 ">
 			<div class="mb-2">
-				<a href="#"><i class="fa-brands fa-facebook me-3"></i></a>
-				 <a href="#"><i class="fab fa-twitter text-dark me-3"></i></a> 
-					<a href="#"><i class="fab fa-linkedin text-dark me-3"></i></a> 
-					<a href="#"><i class="fab fa-github text-dark me-3"></i></a>
+				<a href="#"><i class="fa-brands fa-facebook me-3"></i></a> <a
+					href="#"><i class="fab fa-twitter text-dark me-3"></i></a> <a
+					href="#"><i class="fab fa-linkedin text-dark me-3"></i></a> <a
+					href="#"><i class="fab fa-github text-dark me-3"></i></a>
 			</div>
 		</div>
 
@@ -135,14 +152,16 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<!-- Toastr JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+		async defer></script>
 
 	<!-- Custom JS for sidebar functionality -->
 	<script type="text/javascript" th:src="@{/JS/script.js}"></script>
-	
-	
+
+
 	<script type="text/javascript" th:src="@{/JS/contactForm.js}"></script>
 
 	<script

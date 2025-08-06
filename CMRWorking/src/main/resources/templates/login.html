@@ -1,44 +1,47 @@
 <!doctype html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org/" th:replace="~{ base::baseFrag(~{::section}) }">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+	th:replace="~{ base::baseFrag(~{::section}) }">
 <head>
-	<meta charset="UTF-8" />
-	<title></title>
+<meta charset="UTF-8" />
+<title></title>
 </head>
 <body>
 
-	<section class=" main-content flex-grow-1 flex-column justify-content-center align-items-center min-vh-75">
-			
-	<div class="container">		
-		<div class="d-flex justify-content-center align-items-center">
+	<section
+		class=" main-content flex-grow-1 flex-column justify-content-center align-items-center min-vh-75">
+
+		<div class="container">
+			<div class="d-flex justify-content-center align-items-center">
 				<div class="w-50 " style="min-height: 50vh;">
 
 					<div class="d-flex justify-content-center mt-4">
 						<h2>Login here</h2>
 					</div>
-					
-			
+
+
 					<div th:if="${loginError != null}">
 						<input type="hidden" id="captchaResponse" th:value="${loginError}" />
 						<input type="hidden" id="toastType" th:value="${toastType}" />
 					</div>
 
 					<div th:if="${captchaSuccess != null}">
-						<input type="hidden" id="captchaResponse" th:value="${captchaSuccess}" /> 
-						<input type="hidden" id="toastType" th:value="${toastType}" />
+						<input type="hidden" id="captchaResponse"
+							th:value="${captchaSuccess}" /> <input type="hidden"
+							id="toastType" th:value="${toastType}" />
 					</div>
 
 
-					<input type="hidden" id="logoutPopupMessage" th:value="${logoutMessage}" />
-					<input type="hidden" id="logouttoastType" th:value="${toastType}" />
-					
-				
+					<input type="hidden" id="logoutPopupMessage"
+						th:value="${logoutMessage}" /> <input type="hidden"
+						id="logouttoastType" th:value="${toastType}" />
 
-					<form class="row g-3 mx-5 mb-5 mt-3" th:action="@{/do-login}" th:method="post">
+
+
+					<form class="row g-3 mx-5 mb-5 mt-3" th:action="@{/do-login}"
+						th:method="post">
 						<div class="mb-3">
 							<label for="exampleInputEmail1" class="form-label">Email
-								address</label> 
-							
-							<input type="email" name="username" class="form-control"
+								address</label> <input type="email" name="username" class="form-control"
 								placeholder="Enter Email" id="exampleInputEmail1"
 								aria-describedby="emailHelp" required>
 
@@ -47,10 +50,11 @@
 						</div>
 						<div class="mb-3">
 							<label for="exampleInputPassword1" class="form-label">Password</label>
-							
+
 							<input type="password" name="password" class="form-control"
 								placeholder="Enter Password" id="exampleInputPassword1" required>
-								
+							<div class="form-text">Test@123</div>
+
 						</div>
 
 						<div class="cf-turnstile text-center"
@@ -62,13 +66,13 @@
 				</div>
 
 
-				
+
+			</div>
 		</div>
-		</div>
-			
-			
+
+
 	</section>
 
-	
+
 </body>
 </html>

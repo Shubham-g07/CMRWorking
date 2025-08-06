@@ -1,0 +1,127 @@
+/* Custom Styles for User Profile Page */
+
+#userProfileSection {
+    flex-grow: 1; 
+    display: flex;
+    align-items: center; 
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+
+.user-profile-card {
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.user-info-col {
+    background: linear-gradient(135deg, #007bff, #0056b3); /* Blue gradient */
+    color: #fff;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+#sidebar ul li a i.fas {
+    margin-right: 0.75rem !important; /* Forces the margin, equivalent to Tailwind's mr-3 */
+}
+
+/* You might also want to ensure the links themselves are flex items */
+#sidebar ul li a {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image-wrapper {
+    width: 150px;
+    height: 150px;
+}
+
+.profile-image-wrapper img {
+    border: 3px solid #fff; /* White border for the image */
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+.status-badge {
+    top: 15px; /* Adjust position of the badge */
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #fff;
+}
+
+.user-details-col {
+    background-color: #fff;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-details-heading {
+    font-weight: bold;
+    color: #333;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.user-details-heading::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px; /* Underline width */
+    height: 3px;
+    background-color: #007bff; /* Underline color */
+    border-radius: 2px;
+}
+
+.user-details-col p {
+    margin-bottom: 0.5rem; /* Reduce space between paragraphs */
+}
+
+.user-details-col strong {
+    color: #6c757d; /* Secondary color for labels */
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: block; /* Make strong elements block to push value below */
+}
+
+.user-details-col p span {
+    font-size: 1rem;
+    color: #212529; /* Darker color for values */
+}
+
+.text-muted {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.social-icons a {
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #007bff !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .user-info-col {
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 1rem; /* Rounded top-right for mobile */
+    }
+    .user-details-col {
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 1rem; /* Rounded bottom-left for mobile */
+    }
+    .user-profile-card .row {
+        flex-direction: column; /* Stack columns on small screens */
+    }
+    .user-details-col {
+        padding-top: 2rem;
+    }
+    .text-md-end {
+        text-align: start !important; /* Align status to start on mobile */
+    }
+}
