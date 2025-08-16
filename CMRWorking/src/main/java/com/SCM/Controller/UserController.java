@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
-import java.util.Optional;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -16,7 +15,6 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,6 +64,28 @@ public class UserController {
 		}
 
 		m.addAttribute("title", "User Dashboard");
+		
+		
+		String name = principal.getName();
+		
+		User user = userrepo.getUserByUserName(name);
+		
+		Set<Contacts> contact = user.getContact();
+		
+		m.addAttribute("user", user);
+		
+		long favContact = 0;
+		
+		if( user != null && user.getContact() != null) {
+			favContact = user.getContact().stream()
+						.filter(c->c.isCIsFav())
+						.count();
+		}
+		
+		m.addAttribute("favContact", favContact);
+		m.addAttribute("contact", contact);
+		
+		
 
 		return "normal/user_dashboard";
 	}

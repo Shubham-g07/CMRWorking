@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/"
-	th:fragment="baseFrag(content)">
+	th:fragment="showBaseFrag(content)">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,8 +29,6 @@
 <link rel="stylesheet" th:href="@{/CSS/style.css}" />
 
 
-<link rel="stylesheet" th:href="@{CSS/profile-style.css}" />
-
 <link rel="stylesheet" th:href="@{/CSS/contactForm.css}" />
 
 <title th:text="${title}"></title>
@@ -43,7 +41,7 @@
 		style="background-color: #e3f2fd;">
 
 		<div
-			class="container-fluid d-flex justify-content-start align-items-center">
+			class="container-fluid d-flex justify-content-between align-items-center">
 			<!-- Menu Toggle Button - Placed correctly in the navbar -->
 			<button id="menu-toggle"
 				class="navbar-toggler p-2 rounded-full rounded-md hover:bg-gray-200 transition-colors duration-200"
@@ -54,6 +52,25 @@
 			<a class="navbar-brand ps-4" th:href="@{/}">Smart Contact
 				Manager</a>
 
+			<div
+				class="d-flex align-items-center flex-grow-1 justify-content-end position-relative"
+				style="gap: 1rem;">
+
+				<!-- Search input wrapper -->
+				<div id="searchWrapper" class="search-wrapper">
+					<input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search..." />
+					<!-- Search Results Dropdown - Added here -->
+					<div id="searchResultsDropdown" class="search-results-dropdown">
+						<!-- Content for search results will go here -->
+						
+						
+					</div>
+				</div>
+
+				<!-- Search toggle button -->
+				<button id="searchToggleBtn" class="btn btn-outline-success"
+					type="button">Search</button>
+			</div>
 		</div>
 
 	</nav>
@@ -69,7 +86,7 @@
 
 				<a th:href="@{/user/profile}" class="block text-decoration-none">
 					<div id="sidebar-logo"
-						class="profile cursor-pointer bg-white bg-opacity-20 rounded-full shadow-inner hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center overflow-hidden">
+						class="profile cursor-pointer bg-white bg-opacity-20 rounded-full shadow-inner hover:bg-opacity-30 transition-all duration-300 flex items-center justify-content-center overflow-hidden">
 						<img id="sidebar-profile-img"
 							th:src="${user.uImgName != null ? '/Images/' + user.uImgName : 'userImage.jpeg'}"
 							alt="User Profile"
@@ -144,13 +161,13 @@
 
 	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js"
 		async defer></script>
-
-	<!-- Custom JS for sidebar functionality -->
-	<script type="text/javascript" th:src="@{/JS/script.js}"></script>
+	
+	<script type="text/javascript" th:src="@{/JS/showContact.js}"></script>
 
 
 	<script type="text/javascript" th:src="@{/JS/contactForm.js}"></script>
 
+	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

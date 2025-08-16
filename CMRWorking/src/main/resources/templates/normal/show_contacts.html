@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org/" th:replace="~{ normal/base::baseFrag(~{::section}) }">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org/" th:replace="~{ normal/showContactsBase::showBaseFrag(~{::section}) }">
 <head>
 	<meta charset="UTF-8" />
 	<title></title>
@@ -53,7 +53,7 @@
 					<form th:action="@{'/user/updateContact/'+${c.cId}}" method="post">
 						<button type="submit" class="btn btn-primary m-1 btn-sm">Update</button>
 					</form>
-									<a th:href="@{'/user/deleteContact/'+${c.cId}}" class="btn btn-danger m-1 btn-sm">Delete</a>
+						<a th:href="@{'/user/deleteContact/'+${c.cId}}" class="btn btn-danger m-1 btn-sm">Delete</a>
                     </div>
                     </td>
                 </tr>

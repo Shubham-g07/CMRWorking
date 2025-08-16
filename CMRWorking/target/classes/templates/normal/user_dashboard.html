@@ -1,28 +1,97 @@
 <!doctype html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org/" th:replace="~{ normal/base::baseFrag(~{::section}) }">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org/" th:replace="~{ normal/tailBase::tailbaseFrag(~{::section}) }">
 <head>
 	<meta charset="UTF-8" />
 	<title></title>
 </head>
 <body>
 	
-	<section class="main-content">
+<section class="main-content-dashboard p-4 sm:p-6 lg:p-8 bg-gray-100 min-h-screen dashboard-section">
+
 	
-	<h1>This is user dashboard</h1>
+
+
+
+		<h1 class="text-4xl font-extrabold text-center text-gray-800 mb-4 tracking-tight dashboard-heading">Welcome, <span th:text="${#strings.toUpperCase(user.uName)}"></span>!</h1>
+		<p class="text-lg text-center text-gray-600 mb-8 dashboard-subheading">Your Smart Contact Manager Dashboard</p>
 	
-	<div th:if="${loginSuccess != null }">
+		<!-- Hidden inputs for Toastr messages -->
+		<div th:if="${loginSuccess != null }">
 			<input type="hidden" id="captchaResponse" th:value="${loginSuccess}" />
 			<input type="hidden" id="toastType" th:value="${toastType}" />
-	</div>
+		</div>
 	
+		<div class="max-w-6xl mx-auto">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+				<!-- Total Contacts Card -->
+				<div class="dashboard-card card-total-contacts">
+					<i class="fas fa-users dashboard-icon text-blue-500"></i>
+					<h5 class="text-xl font-semibold text-gray-700 mb-2">Total Contacts</h5>
+					<p class="text-5xl font-bold text-gray-900" th:text="${user.contact.size()}">0</p>
+				</div>
 	
-	<div>
-	<p th:text="${user}"></p>
-	</div>
+				<!-- Active Contacts Card -->
+				<div class="dashboard-card card-active-contacts">
+					<i class="fas fa-user-check dashboard-icon text-green-500"></i>
+					<h5 class="text-xl font-semibold text-gray-700 mb-2">Favorite Contacts</h5>
+					<p class="text-5xl font-bold text-gray-900">
+						<span th:text="${favContact}">0</span>
+					</p>
+				</div>
 	
-	<h1><a th:href="@{/logout}">Logout</a></h1>
+				<!-- Quick Actions Card -->
+				<div class="dashboard-card card-quick-actions">
+					<h5 class="text-xl font-semibold text-gray-700 mb-4">Quick Actions</h5>
+					<a th:href="@{/user/addContact}" class="w-full mb-3 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center dashboard-button">
+						<i class="fas fa-plus-circle mr-2"></i> Add New Contact
+					</a>
+					<a th:href="@{/user/showContacts/0}" class="w-full px-6 py-3 border border-blue-600 text-blue-600 font-semibold rounded-lg shadow-md hover:bg-blue-50 transition-colors duration-300 flex items-center justify-center dashboard-button-outline">
+						<i class="fas fa-address-book mr-2"></i> View All Contacts
+					</a>
+				</div>
+			</div>
 	
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+				<!-- Recent Contacts Section -->
+				<div class="bg-white rounded-xl shadow-lg p-6 dashboard-recent-contacts">
+					<div class="flex justify-between items-center mb-4 border-b pb-3 dashboard-header">
+						<h4 class="text-2xl font-semibold text-gray-800">Recent Contacts</h4>
+						<a th:href="@{/user/showContacts/0}" class="text-blue-600 hover:text-blue-800 text-sm font-medium dashboard-view-all">View All</a>
+					</div>
+					
+					<div th:if="${!user.contact.isEmpty()}">
+						<ul class="divide-y divide-gray-200">
+							<li th:each="contact : ${user.contact.stream().limit(5).toList()}" class="py-3 flex items-center justify-between dashboard-list-item">
+								<div class="flex items-center">
+									<img th:src="${contact.cImgName != null ? '/Images/' + contact.cImgName : ''}"
+										 alt="Contact Profile"
+										 class="w-10 h-10 rounded-full object-cover mr-3 dashboard-contact-img"
+										  style="object-fit: cover;"
+										 />
+									<div>
+										<h5 class="text-lg font-medium text-gray-900" th:text="${contact.cName}">Contact Name</h5>
+										<p class="text-sm text-gray-500" th:text="${contact.cEmail}">contact@example.com</p>
+									</div>
+								</div>
+								<a th:href="@{'/user/contactProfile/' + ${contact.cId}}" class="text-blue-500 hover:text-blue-700 text-sm font-medium dashboard-list-link">View</a>
+							</li>
+						</ul>
+					</div>
+					<div th:unless="${!user.contact.isEmpty()}">
+						<p class="text-gray-600 text-center py-4 dashboard-empty-message">No recent contacts found. Add some contacts to see them here!</p>
+					</div>
+				</div>
+
+				<!-- Placeholder for other widgets (e.g., Upcoming Reminders) -->
+				<div class="bg-white rounded-xl shadow-lg p-6 dashboard-reminders">
+					<h4 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-3 dashboard-header">Upcoming Reminders</h4>
+					<p class="text-gray-600 text-center py-4 dashboard-empty-message">No upcoming reminders. Add events to your contacts!</p>
+					<!-- You could add a list of reminders here -->
+				</div>
+			</div>
+		</div>
 	
+
 	</section>
 	
 </body>

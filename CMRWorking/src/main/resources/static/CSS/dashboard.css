@@ -1,0 +1,169 @@
+/* Custom CSS for the User Dashboard Page */
+
+/* Overall Section Styling */
+.dashboard-section {
+	
+    background: linear-gradient(135deg, #f0f4f8, #e0e7ed); 
+    padding-bottom: 1.5rem; 
+    min-height: calc(100vh - 80px);
+}
+
+.main-content-dashboard{
+	margin-top: 50px;
+}
+
+/* Headings */
+.dashboard-heading {
+    color: #1a202c; /* Darker text for main heading */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05); /* Subtle text shadow */
+    font-size: 2.5rem; /* Reduced heading size */
+    margin-bottom: 1rem; /* Reduced margin */
+}
+
+.dashboard-subheading {
+    color: #4a5568; /* Slightly darker subheading */
+    font-size: 1rem; /* Reduced subheading size */
+    margin-bottom: 2rem; /* Reduced margin */
+}
+
+/* Dashboard Cards (Common Styles) */
+.dashboard-card {
+    background: linear-gradient(145deg, #ffffff, #f0f4f8); /* Subtle gradient background */
+    border-radius: 0.75rem; /* Slightly less rounded corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07); /* Slightly smaller shadow */
+    padding: 1.5rem; /* Reduced padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.3s ease-in-out; /* Smooth transitions for all properties */
+    border: 1px solid #e2e8f0; /* Light border */
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px) scale(1.01); /* Smaller lift and scale on hover */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12); /* Less pronounced shadow on hover */
+}
+
+/* Dashboard Icons */
+.dashboard-icon {
+    font-size: 2.5rem; /* Reduced icon size */
+    margin-bottom: 1rem; /* Reduced space below icons */
+    text-shadow: 0px 0px 6px rgba(66, 153, 225, 0.4); /* Subtle glow */
+}
+
+.card-active-contacts .dashboard-icon {
+    text-shadow: 0px 0px 6px rgba(76, 175, 80, 0.4); /* Subtle green glow */
+}
+
+/* Dashboard Buttons */
+.dashboard-button,
+.dashboard-button-outline {
+    border-radius: 0.6rem; /* Slightly less rounded buttons */
+    font-weight: 600; /* Semi-bold text */
+    padding: 0.6rem 1.2rem; /* Reduced padding */
+    font-size: 0.95rem; /* Slightly smaller font size */
+    transition: all 0.3s ease-in-out;
+}
+
+.dashboard-button:hover {
+    transform: translateY(-1px); /* Smaller lift on hover */
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25); /* Smaller blue shadow on hover */
+}
+
+.dashboard-button-outline:hover {
+    background-color: #e0f2fe; /* Lighter blue background on hover */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+}
+
+/* Recent Contacts / Reminders Sections */
+.dashboard-recent-contacts,
+.dashboard-reminders {
+    background-color: #ffffff;
+    border-radius: 0.75rem; /* Slightly less rounded */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); /* Lighter, smaller shadow */
+    padding: 1.5rem; /* Reduced padding */
+    border: 1px solid #e2e8f0;
+}
+
+.dashboard-header {
+    border-bottom: 1px solid #cbd5e0; /* Thinner border */
+    padding-bottom: 0.5rem; /* Reduced padding */
+    margin-bottom: 1rem; /* Reduced margin */
+    font-size: 1.5rem; /* Reduced heading size */
+}
+
+.dashboard-view-all {
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-size: 0.85rem; /* Smaller font size */
+}
+
+.dashboard-view-all:hover {
+    text-decoration: underline;
+}
+
+/* Recent Contacts List Items */
+.dashboard-list-item {
+    padding-top: 0.75rem; /* Reduced padding */
+    padding-bottom: 0.75rem; /* Reduced padding */
+    transition: background-color 0.2s ease;
+}
+
+.dashboard-list-item:hover {
+    background-color: #f7f9fb; /* Lighter background on hover */
+    border-radius: 0.4rem; /* Slightly rounded corners on hover */
+}
+
+.dashboard-contact-img {
+    width: 3rem; /* Smaller image size */
+    height: 3rem; /* Smaller image size */
+    border: 1px solid #e2e8f0; /* Thinner border around contact image */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04); /* Smaller shadow */
+    margin-right: 0.75rem; /* Reduced margin */
+}
+
+.dashboard-list-link {
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-size: 0.85rem; /* Smaller font size */
+}
+
+.dashboard-list-link:hover {
+    text-decoration: underline;
+}
+
+.dashboard-empty-message {
+    font-style: italic;
+    color: #718096;
+    font-size: 0.9rem; /* Smaller font size */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .dashboard-card {
+        padding: 1rem; /* Further reduced padding on small screens */
+    }
+    .dashboard-icon {
+        font-size: 2rem; /* Further reduced icon size */
+    }
+    .dashboard-heading {
+        font-size: 2rem; /* Further reduced heading size */
+    }
+    .dashboard-button,
+    .dashboard-button-outline {
+        padding: 0.5rem 1rem; /* Further reduced button padding */
+        font-size: 0.85rem;
+    }
+    .dashboard-recent-contacts,
+    .dashboard-reminders {
+        padding: 1rem; /* Further reduced padding */
+    }
+    .dashboard-header {
+        font-size: 1.25rem; /* Further reduced header size */
+    }
+}

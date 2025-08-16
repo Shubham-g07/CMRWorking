@@ -73,6 +73,7 @@ h6 {
 	overflow: hidden;
 	transition: width 0.5s ease;
 	white-space: nowrap;
+	position: relative; 
 }
 
 .search-wrapper input {
@@ -81,7 +82,45 @@ h6 {
 
 .search-wrapper.active {
 	width: 200px;
+	overflow: visible;
 }
+
+/* New CSS for search results dropdown */
+.search-results-dropdown {
+	position: absolute;
+	top: 100%; /* Position below the input */
+	left: 0;
+	width: 100%; /* Match width of the input */
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-top: none;
+	border-radius: 0 0 0.375rem 0.375rem;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+	display: none; /* Hidden by default */
+	max-height: 200px; /* Optional: scrollable if many results */
+	overflow-y: auto; /* Optional: scrollable if many results */
+}
+
+.search-results-dropdown.active {
+	display: block; /* Show when active */
+}
+
+.search-results-dropdown .list-group-item {
+	padding: 0.75rem 1.25rem;
+	border: none;
+	border-bottom: 1px solid #eee;
+}
+
+.search-results-dropdown .list-group-item:last-child {
+	border-bottom: none;
+}
+
+.search-results-dropdown .list-group-item:hover {
+	background-color: #f8f8f8;
+	cursor: pointer;
+}
+
 
 .nav-links {
 	transition: transform 0.5s ease;
@@ -110,14 +149,14 @@ i {
 
 .sidebar {
 	width: 280px;
-	transform: translateX(-100%);
+	transform: translateX(-100%) !important;
 	transition: transform 0.3s ease-in-out;
 	flex-shrink: 0;
 	position: fixed;
 	top: 0;
 	left: 0;
 	bottom: 0;
-	z-index: 1040;
+	z-index: 1040 !important;
 	background: linear-gradient(to bottom right, rgb(255, 128, 255), #9a55ff);
 	color: white;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -145,7 +184,7 @@ i {
 }
 
 body.sidebar-open .sidebar {
-	transform: translateX(0);
+	transform: translateX(0) !important;
 }
 
 body.sidebar-open .main-content-area {

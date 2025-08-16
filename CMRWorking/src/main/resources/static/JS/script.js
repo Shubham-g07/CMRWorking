@@ -1,19 +1,6 @@
 console.log("This is coming from js script!!!");
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Search functionality
-    const searchWrapper = document.getElementById("searchWrapper");
-    const searchToggleBtn = document.getElementById("searchToggleBtn");
-    const navLinks = document.querySelector(".nav-links");
-
-    let isSearchOpen = false;
-
-    searchToggleBtn.addEventListener("click", () => {
-        isSearchOpen = !isSearchOpen;
-        searchWrapper.classList.toggle("active", isSearchOpen);
-        navLinks.classList.toggle("shifted", isSearchOpen);
-    });
-
     // Sidebar functionality
     const menuToggle = document.getElementById('menu-toggle');
     const sidebarLogo = document.getElementById('sidebar-logo'); // The address book icon in the sidebar
@@ -68,42 +55,36 @@ window.addEventListener("DOMContentLoaded", () => {
         };
         toastr[logoutType](logout);
     }
-	
-	const deletedMsg = document.getElementById("deletedMsg")?.value?.trim();
-	const deleteType = document.getElementById("deletedtoastType")?.value || 'info';
+    
+    const deletedMsg = document.getElementById("deletedMsg")?.value?.trim();
+    const deleteType = document.getElementById("deletedtoastType")?.value || 'info';
 
-	if (deletedMsg && deletedMsg.length > 0) {
-	    toastr.options = {
-	        "closeButton": true,
-	        "progressBar": true,
-	        "positionClass": "toast-top-center",
-	        "timeOut": "5000",
-	        "preventDuplicates": true,
-	        "newestOnTop": true
-	    };
-	    toastr[deleteType](deletedMsg);
-	}
-	
-	
-	const updateMsg = document.getElementById("updateMsg")?.value?.trim();
-	const updatedType = document.getElementById("updatedtoastType")?.value || 'info';
+    if (deletedMsg && deletedMsg.length > 0) {
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "timeOut": "5000",
+            "preventDuplicates": true,
+            "newestOnTop": true
+        };
+        toastr[deleteType](deletedMsg);
+    }
+    
+    
+    const updateMsg = document.getElementById("updateMsg")?.value?.trim();
+    const updatedType = document.getElementById("updatedtoastType")?.value || 'info';
 
-	if (updateMsg && updateMsg.length > 0) {
-	    toastr.options = {
-	        "closeButton": true,
-	        "progressBar": true,
-	        "positionClass": "toast-top-center",
-	        "timeOut": "5000",
-	        "preventDuplicates": true,
-	        "newestOnTop": true
-	    };
-	    toastr[updatedType](updateMsg);
-	}
-
-	
-
-	
+    if (updateMsg && updateMsg.length > 0) {
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "timeOut": "5000",
+            "preventDuplicates": true,
+            "newestOnTop": true
+        };
+        toastr[updatedType](updateMsg);
+    }
 
 });
-
-
