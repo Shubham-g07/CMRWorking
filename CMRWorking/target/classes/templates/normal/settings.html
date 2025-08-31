@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org/" th:replace="~{ normal/tailBase::tailbaseFrag(~{::section}) }">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+
+</head>
+
+<body>
+
+    <section class="main-content-dashboard p-4 sm:p-4 lg:p-8 bg-gray-100 dashboard-section">
+    
+    	<div th:if="${unmatched != null }">
+			<input type="hidden" id="unmatched" th:value="${unmatched}" />
+			<input type="hidden" id="unmatchedType" th:value="${toastType}" />
+		</div>
+		
+        <!-- Welcome banner as per your original template -->
+        <h1 class="text-4xl font-extrabold text-center text-gray-800 tracking-tight dashboard-heading">
+            Welcome, <span class="uppercase">JOHN DOE</span>!
+        </h1>
+        <p class="text-lg text-center text-gray-600 mb-8 dashboard-subheading">Settings Page</p>
+
+        <!-- --- Password Change Form --- -->
+        <div class="form-card bg-white md:p-8 rounded-2xl shadow-lg border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Change Password</h2>
+
+            <form id="password-change-form" th:action="@{/user/change-password}" method="POST">
+                <!-- Old Password Field -->
+                <div class="mb-5">
+                    <label for="old-password" class="block text-sm font-medium text-gray-700 mb-1">Old Password</label>
+                    <div class="password-toggle-container">
+                        <input type="password" id="old-password" name="old-password" required
+                            class="p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                        <button type="button" class="password-toggle-button" data-target="old-password">
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- New Password Field -->
+                <div class="mb-5">
+                    <label for="new-password" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                    <div class="password-toggle-container">
+                        <input type="password" id="new-password" name="new-password" required
+                            class="p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                        <button type="button" class="password-toggle-button" data-target="new-password">
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div class="mb-6">
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm New
+                        Password</label>
+                    <div class="password-toggle-container">
+                        <input type="password" id="confirm-password" name="confirm-password" required
+                            class="p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                        <button type="button" class="password-toggle-button" data-target="confirm-password">
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Form Message Display -->
+                <div id="form-message" class="text-center text-sm font-medium mb-4" style="display:none;"></div>
+
+                <!-- Buttons -->
+                <div class="flex justify-center gap-4">
+                    <button type="submit" id="confirm-button"
+                        class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Confirm
+                    </button>
+                    <button type="reset" id="reset-button"
+                        class="px-6 py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
+                        Reset
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+
+</body>
+
+</html>

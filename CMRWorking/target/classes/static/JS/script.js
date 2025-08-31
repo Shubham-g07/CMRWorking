@@ -86,5 +86,46 @@ window.addEventListener("DOMContentLoaded", () => {
         };
         toastr[updatedType](updateMsg);
     }
+	
+	
+	const unmatchedMsg = document.getElementById("unmatched")?.value?.trim();
+	const unmatchedType = document.getElementById("unmatchedType")?.value || 'info';
 
+	if (unmatchedMsg && unmatchedMsg.length > 0) {
+	    toastr.options = {
+	        "closeButton": true,
+	        "progressBar": true,
+	        "positionClass": "toast-top-center",
+	        "timeOut": "5000",
+	        "preventDuplicates": true,
+	        "newestOnTop": true
+	    };
+	    toastr[unmatchedType](unmatchedMsg);
+	}
+	
+
+});
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleButtons = document.querySelectorAll('.password-toggle-button');
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.dataset.target;
+            const passwordInput = document.getElementById(targetId);
+            const isPassword = passwordInput.type === 'password';
+            
+            // Toggle the input type
+            passwordInput.type = isPassword ? 'text' : 'password';
+
+            // Update the eye icon (simple change for now)
+            const eyeIconPath = 'M10 12a2 2 0 100-4 2 2 0 000 4z';
+            const eyeOffIconPath = 'M13.832 9.42a2 2 0 01-1.415-2.072A1.999 1.999 0 0110 6a2 2 0 012-2 1.999 1.999 0 012.417 1.347A.999.999 0 0114.6 6.5l.388.388a.999.999 0 010 1.414l-.999.999-.388.388a.999.999 0 01-1.414 0zM10 10a2 2 0 100 4 2 2 0 000-4z';
+            
+            const newIconPath = isPassword ? eyeOffIconPath : eyeIconPath;
+            const svgPath = button.querySelector('path:first-child');
+            svgPath.setAttribute('d', newIconPath);
+        });
+    });
 });

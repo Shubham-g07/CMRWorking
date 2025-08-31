@@ -20,8 +20,9 @@
 			</div>
 							
 
+		<div class="table-responsive">
 		<div th:if="${not #lists.isEmpty(userContacts)}" class="card-body flex-grow-1">
-        <table class="table">
+        <table class="table table-bordered table-hover">
             <thead class="thead-dark">
                 <tr class="table-primary">
                     <th class="text-center" scope="col">#ID</th>
@@ -47,8 +48,8 @@
                     <td><a class="text-dark" th:href="@{'/user/contactProfile/'+${c.cId}}"><span th:text="${c.cEmail}"></span></a></td>
                     <td th:text="${c.cNumber}"></td>
                     <td th:text="${c.cWork}"></td>
-                    <td class="d-flex justify-content-center">
-                    <div class="d-flex">
+                    <td class="tableButton d-flex justify-content-center align-items-stretch">
+                    <div class="d-flex tableButtonDiv">
 
 					<form th:action="@{'/user/updateContact/'+${c.cId}}" method="post">
 						<button type="submit" class="btn btn-primary m-1 btn-sm">Update</button>
@@ -84,6 +85,7 @@
 
 
 			</div>
+		</div>
 
   <div th:unless="${not #lists.isEmpty(userContacts)}"
          class="card-body flex-grow-1 d-flex flex-column justify-content-center align-items-center text-center">

@@ -375,3 +375,47 @@ footer .fa-brands, footer .fab {
 .updateForm {
 	height: 1200px;
 }
+
+.tableButton {
+	height:auto;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.tableButtonDiv {
+	height:100%;
+    display: flex;
+    width: 100%;
+}
+
+ .form-card {
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Style for the password toggle button */
+        .password-toggle-container {
+            position: relative;
+        }
+
+        .password-toggle-button {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            color: #6B7280;
+        }
+
+        .password-toggle-button:focus {
+            outline: none;
+        }
+
+        .password-toggle-button:hover {
+            color: #374151;
+        }

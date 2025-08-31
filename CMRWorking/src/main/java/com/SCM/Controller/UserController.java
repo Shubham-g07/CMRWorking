@@ -15,6 +15,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,9 @@ import com.SCM.Repository.userRepository;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	
+	@Autowired
+	BCryptPasswordEncoder bCryptPassEncoder;
 
 	@Autowired
 	userRepository userrepo;
@@ -282,5 +286,56 @@ public class UserController {
 
 		return "redirect:/user/contactProfile/" + contact.getCId();
 	}
+	
+	
+	// open setting handler 
+	@GetMapping("/settings")
+	public String openSettings() {
+		
+		return "normal/settings";
+	}
+	
+	
+	//change password handler
+	@PostMapping("/change-password")
+	public String changePass(@RequestParam("old-password") String oldPass, @RequestParam("new-password") String newPass, 
+			@RequestParam("confirm-password") String confirmPass,Principal principal, RedirectAttributes redirectAttrs) {
+		
+		
+		System.out.println("oldPassword :- "+ oldPass);
+		System.out.println("newPassword :- "+ newPass);
+		System.out.println("confirmPassword :- "+confirmPass);
+		
+		
+		String name = principal.getName();
+		User existinguser = userrepo.getUserByUserName(name);
+		
+		String ogPass = existinguser.getUPassword();
+		
+		System.out.println("Original Password :- "+ ogPass);
+		
+		
+		
+		if(this.bCryptPassEncoder.matches(oldPass, ogPass)) {
+			if(newPass.equals(confirmPass)) {
+			existinguser.setUPassword(this.bCryptPassEncoder.encode(newPass));
+			userrepo.save(existinguser);
+			}else{
+				redirectAttrs.addFlashAttribute("unmatched", "Match both passwords correctly!!!");
+				redirectAttrs.addFlashAttribute("toastType", "error");
+				return "redirect:/user/settings";
+			}
+		}else {
+			redirectAttrs.addFlashAttribute("unmatched", "Invalid Old Password");
+			redirectAttrs.addFlashAttribute("toastType", "error");
+			return "redirect:/user/settings";
+		}
+		
+		redirectAttrs.addFlashAttribute("loginSuccess", "Password changed successfully");
+		redirectAttrs.addFlashAttribute("toastType", "success");
+
+		return "redirect:/logout";
+	}
+	
 
 }
