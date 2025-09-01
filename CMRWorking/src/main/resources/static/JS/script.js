@@ -103,7 +103,21 @@ window.addEventListener("DOMContentLoaded", () => {
 	    toastr[unmatchedType](unmatchedMsg);
 	}
 	
+	const emailMsg = document.getElementById("email")?.value?.trim();
+	const emailType = document.getElementById("emailType")?.value || 'info';
 
+		if (emailMsg && emailMsg.length > 0) {
+		    toastr.options = {
+		        "closeButton": true,
+		        "progressBar": true,
+		        "positionClass": "toast-top-center",
+		        "timeOut": "5000",
+		        "preventDuplicates": true,
+		        "newestOnTop": true
+		    };
+		    toastr[emailType](emailMsg);
+		}
+	
 });
 
 

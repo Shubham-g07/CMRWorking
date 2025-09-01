@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS for the page -->
+    <style>
+        .form-card {
+            max-width: 28rem;
+        }
+
+        /* Basic styling for OTP input fields */
+        .otp-input {
+            width: 3rem;
+            height: 3.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .otp-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+	
+	
+
+    <!-- OTP Verification Form -->
+    <div class="form-card bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-gray-200 w-full">
+    
+	
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-2">OTP Verification</h2>
+        <p class="text-center text-gray-600 mb-6">A 6-digit OTP has been sent to your email. Please enter it below.</p>
+        
+        <form id="otp-form" th:action="@{/changePass/otp-verify}" method="POST" class="space-y-6">
+            
+            <!-- OTP Input Fields Container -->
+            <div class="flex justify-center space-x-2">
+                <input type="text" id="otp-1" name="otp-1" required maxlength="1" class="otp-input" placeholder="0">
+                <input type="text" id="otp-2" name="otp-2" required maxlength="1" class="otp-input" placeholder="0">
+                <input type="text" id="otp-3" name="otp-3" required maxlength="1" class="otp-input" placeholder="0">
+                <input type="text" id="otp-4" name="otp-4" required maxlength="1" class="otp-input" placeholder="0">
+                <input type="text" id="otp-5" name="otp-5" required maxlength="1" class="otp-input" placeholder="0">
+                <input type="text" id="otp-6" name="otp-6" required maxlength="1" class="otp-input" placeholder="0">
+            </div>
+            
+            <!-- Hidden input to combine OTP digits -->
+            <input type="hidden" id="full-otp" name="otp">
+            
+            <!-- Form Message Display -->
+            <div id="form-message" class="text-center text-sm font-medium" style="display:none;"></div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-center">
+                <button type="submit" id="verify-button"
+                    class="px-6 py-3 w-full bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    Verify
+                </button>
+            </div>
+            
+            <!-- Resend OTP and Back links -->
+            <div class="mt-4 text-center text-sm">
+                <p>Didn't receive the OTP? <a href="@{/changePass/forgotPass}" id="resend-otp" class="text-blue-600 hover:underline">Resend OTP</a></p>
+                <a th:href="@{/login}" class="text-gray-600 hover:underline mt-2 inline-block">Back to Login</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript for OTP input logic -->
+    <script>
+        const otpInputs = document.querySelectorAll('.otp-input');
+        const form = document.getElementById('otp-form');
+        const fullOtpInput = document.getElementById('full-otp');
+
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                // Move to next input field automatically
+                if (e.target.value.length === 1 && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+                updateFullOtp();
+            });
+
+            input.addEventListener('keydown', (e) => {
+                // Move to previous input field on backspace
+                if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+        });
+
+        function updateFullOtp() {
+            let combinedOtp = '';
+            otpInputs.forEach(input => {
+                combinedOtp += input.value;
+            });
+            fullOtpInput.value = combinedOtp;
+        }
+
+        form.addEventListener('submit', (e) => {
+            updateFullOtp();
+            if (fullOtpInput.value.length !== 6) {
+                e.preventDefault();
+                showMessage('Please enter all 6 digits of the OTP.', 'error');
+            }
+        });
+
+        function showMessage(message, type) {
+            const messageEl = document.getElementById('form-message');
+            messageEl.textContent = message;
+            messageEl.style.display = 'block';
+            if (type === 'error') {
+                messageEl.classList.add('text-red-500');
+                messageEl.classList.remove('text-green-500');
+            } else {
+                messageEl.classList.add('text-green-500');
+                messageEl.classList.remove('text-red-500');
+            }
+        }
+        
+    </script>
+   
+</body>
+
+</html>

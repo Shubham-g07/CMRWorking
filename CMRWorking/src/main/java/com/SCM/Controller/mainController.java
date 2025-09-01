@@ -28,7 +28,7 @@ import jakarta.validation.Valid;
 
 @Controller
 public class mainController {
-
+	
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
 
@@ -161,5 +161,7 @@ public class mainController {
 
 		return "/login";
 	}
-
+	
+	
+	
 }

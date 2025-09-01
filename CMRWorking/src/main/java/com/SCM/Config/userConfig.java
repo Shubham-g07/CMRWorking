@@ -75,7 +75,7 @@ public class userConfig {
                 authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("USER")
-                        .requestMatchers("/signup","/login","/CSS/**", "/JS/**", "/Images/**").permitAll()
+                        .requestMatchers("/signup","/login","/CSS/**", "/JS/**", "/Images/**","/changePass/**").permitAll()
                         .anyRequest().authenticated()          
                 )
                 .formLogin(form -> form				// new methods to give form specification older ones are depricated
@@ -97,7 +97,7 @@ public class userConfig {
         // a malicious website tricks a logged-in user into performing unwanted actions
         // on another website (usually where the user is authenticated).
 
-
+        
         return http.build();
     }
 

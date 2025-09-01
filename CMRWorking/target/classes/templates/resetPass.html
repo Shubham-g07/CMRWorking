@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set New Password</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for password toggle button */
+        .password-toggle-container {
+            position: relative;
+        }
+
+        .password-toggle-button {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            color: #6B7280;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .password-toggle-button svg {
+            transition: color 0.2s ease-in-out;
+        }
+
+        .password-toggle-button:hover svg {
+            color: #4B5563;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex justify-center items-center">
+
+    <section class="p-4 sm:p-6 lg:p-8 w-full max-w-lg mx-auto">
+
+        <!-- Main card container for the form -->
+        <div class="form-card bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-gray-200">
+            <h2 class="text-3xl font-bold text-gray-800 text-center mb-6">Set Your New Password</h2>
+
+            <!-- Success/Error Message Display -->
+           <div th:if="${message}"
+                 th:classappend="${type == 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}"
+                 class="text-center text-sm font-medium mb-4 p-3 rounded-lg">
+                 <p th:text="${message}"></p>
+            </div>
+            
+            <form id="password-change-form" th:action="@{/changePass/set-password}" method="POST">
+                
+                <!-- New Password Field -->
+                <div class="mb-5">
+                    <label for="new-password" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                    <div class="password-toggle-container">
+                        <input type="password" id="new-password" name="newPassword" required
+                            class="p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                        <button type="button" class="password-toggle-button" data-target="new-password">
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div class="mb-6">
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm New
+                        Password</label>
+                    <div class="password-toggle-container">
+                        <input type="password" id="confirm-password" name="confirmPassword" required
+                            class="p-3 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                        <button type="button" class="password-toggle-button" data-target="confirm-password">
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button th:type="submit" id="confirm-button"
+                        class="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        Set Password
+                    </button>
+                    <button th:type="reset" id="reset-button"
+                        class="w-full sm:w-auto px-6 py-3 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2">
+                        Reset
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // JavaScript for toggling password visibility
+        document.querySelectorAll('.password-toggle-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+                const targetInput = document.getElementById(targetId);
+                const type = targetInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                targetInput.setAttribute('type', type);
+
+                // Change the eye icon based on visibility
+                const svgPath = type === 'password'
+                    ? '<path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />'
+                    : '<path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-14-14z" clip-rule="evenodd" /><path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />';
+                button.innerHTML = `<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">${svgPath}</svg>`;
+            });
+        });
+        
+        // JavaScript for form validation
+        document.getElementById('password-change-form').addEventListener('submit', function(event) {
+	    const newPassword = document.getElementById('new-password').value;
+	    const confirmPassword = document.getElementById('confirm-password').value;
+	    const messageElement = document.getElementById('form-message');
+	    
+	    // Hide the message before starting validation
+	    messageElement.style.display = 'none';
+	
+	    if (newPassword !== confirmPassword) {
+	        event.preventDefault(); // Stop form submission
+	        messageElement.textContent = "Passwords do not match!";
+	        messageElement.className = "text-center text-sm font-medium mb-4 p-3 rounded-lg bg-red-100 text-red-700";
+	        messageElement.style.display = 'block';
+	    }
+	});
+       
+    </script>
+
+</body>
+
+</html>

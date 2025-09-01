@@ -37,13 +37,13 @@ import com.SCM.Repository.userRepository;
 public class UserController {
 	
 	@Autowired
-	BCryptPasswordEncoder bCryptPassEncoder;
+	private BCryptPasswordEncoder bCryptPassEncoder;
 
 	@Autowired
-	userRepository userrepo;
+	private userRepository userrepo;
 
 	@Autowired
-	contactRepository contactrepo;
+	private contactRepository contactrepo;
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -336,6 +336,9 @@ public class UserController {
 
 		return "redirect:/logout";
 	}
+	
+
+	
 	
 
 }
